@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прототип системи з генератором випадкових чисел</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ABDCFF, #0396FF);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group, .prototype-group {
+            margin-bottom: 20px;
+        }
+
+        .radio-group, .nav-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .radio-cell, .nav-cell {
+            margin: 10px;
+        }
+
+        .input-cell {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .input-cell input {
+            width: 70px;
+        }
+
+        button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #0396FF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0077b6;
+        }
+
+        textarea {
+            width: 100%;
+            resize: vertical;
+        }
+
+        .prototype-content {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .prototype-section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Прототип системи з генератором випадкових чисел</h1>
+
+        <div class="prototype-group">
+            <h2>Навігація</h2>
+            <div class="nav-group">
+                <div class="nav-cell">
+                    <button onclick="showSection('generator')">Генератор чисел</button>
+                </div>
+                <div class="nav-cell">
+                    <button onclick="showSection('catalog')">Каталог</button>
+                </div>
+                <div class="nav-cell">
+                    <button onclick="showSection('delivery')">Спосіб доставки</button>
+                </div>
+                <div class="nav-cell">
+                    <button onclick="showSection('payment')">Спосіб оплати</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="generator" class="prototype-section active">
+            <h2>Генератор випадкових чисел</h2>
+            <div class="form-group">
+                <label>Тип чисел:</label>
+                <div class="radio-group">
+                    <div class="radio-cell">
+                        <input type="radio" id="integers" name="number-type" value="integers" checked>
+                        <label for="integers">Цілі числа</label>
+                    </div>
+                    <div class="radio-cell">
+                        <input type="radio" id="floats" name="number-type" value="floats">
+                        <label for="floats">Дробові числа</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-cell">
+                    <label for="range-start">Діапазон чисел: Від</label>
+                    <input type="number" id="range-start" value="1">
+                </div>
+                <div class="input-cell">
+                    <label for="range-end">До</label>
+                    <input type="number" id="range-end" value="100">
+                </div>
+            </div>
+            <div class="form-group" id="decimal-places-group" style="display: none;">
+                <div class="input-cell">
+                    <label for="decimal-places">Кількість цифр після коми:</label>
+                    <input type="number" id="decimal-places" min="0" value="2">
+                </div>
+            </div>
+            <button id="generate-btn">Згенерувати</button>
+            <div class="form-group">
+                <label for="result">Згенеровані числа:</label>
+                <textarea id="result" rows="5" readonly></textarea>
+            </div>
+            <div class="button-group">
+                <button id="copy-btn">Скопіювати</button>
+                <button id="save-btn">Зберегти у файл</button>
+            </div>
+        </div>
+
+        <div id="catalog" class="prototype-section">
+            <h2>Каталог</h2>
+            <div class="prototype-content">
+                <p>Тут буде список категорій програмного забезпечення.</p>
+                <button onclick="showSection('antivirus')">Антивіруси</button>
+                <button onclick="showSection('os')">Операційні системи</button>
+                <button onclick="showSection('office')">Офісні програми</button>
+                <button onclick="showSection('utilities')">Утиліти</button>
+            </div>
+        </div>
+
+        <div id="antivirus" class="prototype-section">
+            <h2>Каталог / Антивіруси</h2>
+            <div class="prototype-content">
+                <p>Тут буде список антивірусних програм.</p>
+            </div>
+        </div>
+
+        <div id="os" class="prototype-section">
+            <h2>Каталог / Операційні системи</h2>
+            <div class="prototype-content">
+                <p>Тут буде список операційних систем.</p>
+            </div>
+        </div>
+
+        <div id="office" class="prototype-section">
+            <h2>Каталог / Офісні програми</h2>
+            <div class="prototype-content">
+                <p>Тут буде список офісних програм.</p>
+            </div>
+        </div>
+
+        <div id="utilities" class="prototype-section">
+            <h2>Каталог / Утиліти</h2>
+            <div class="prototype-content">
+                <p>Тут буде список утиліт.</p>
+            </div>
+        </div>
+
+        <div id="delivery" class="prototype-section">
+            <h2>Спосіб доставки</h2>
+            <div class="prototype-content">
+                <p>Тут буде вибір способу доставки.</p>
+            </div>
+        </div>
+
+        <div id="payment" class="prototype-section">
+            <h2>Спосіб оплати</h2>
+            <div class="prototype-content">
+                <p>Тут буде вибір способу оплати.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const numberTypeRadios = document.querySelectorAll('input[name="number-type"]');
+        const rangeStartInput = document.getElementById('range-start');
+        const rangeEndInput = document.getElementById('range-end');
+        const decimalPlacesInput = document.getElementById('decimal-places');
+        const decimalPlacesGroup = document.getElementById('decimal-places-group');
+        const generateButton = document.getElementById('generate-btn');
+        const resultTextarea = document.getElementById('result');
+        const copyButton = document.getElementById('copy-btn');
+        const saveButton = document.getElementById('save-btn');
+
+        numberTypeRadios.forEach(radio => {
+            radio.addEventListener('change', toggleDecimalPlacesGroup);
+        });
+
+        generateButton.addEventListener('click', generateNumbers);
+        copyButton.addEventListener('click', copyResultToClipboard);
+        saveButton.addEventListener('click', saveResultToFile);
+
+        function toggleDecimalPlacesGroup() {
+            const isFloatSelected = document.querySelector('input[name="number-type"]:checked').value === 'floats';
+            decimalPlacesGroup.style.display = isFloatSelected ? 'block' : 'none';
+        }
+
+        function generateNumbers() {
+            const numberType = document.querySelector('input[name="number-type"]:checked').value;
+            const start = parseInt(rangeStartInput.value);
+            const end = parseInt(rangeEndInput.value);
+            const decimalPlaces = parseInt(decimalPlacesInput.value);
+
+            let numbers = [];
+            for (let i = 0; i < 10; i++) {
+                let randomNumber;
+                if (numberType === 'integers') {
+                    randomNumber = Math.floor(Math.random() * (end - start + 1)) + start;
+                } else {
+                    randomNumber = (Math.random() * (end - start) + start).toFixed(decimalPlaces);
+                }
+                numbers.push(randomNumber);
+            }
+
+            resultTextarea.value = numbers.join('\n');
+        }
+
+        function copyResultToClipboard() {
+            resultTextarea.select();
+            document.execCommand('copy');
+        }
+
+        function saveResultToFile() {
+            const content = resultTextarea.value;
+            const filename = 'random_numbers.txt';
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.prototype-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
